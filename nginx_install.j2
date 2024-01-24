@@ -1,0 +1,17 @@
+upstream app {
+  server 192.168.239.135;
+}
+server {
+    listen 80;
+
+    root {{ document_root }}/{{ app_root }};
+    index index.html index.htm;
+
+    server_name {{ server_name }};
+
+    location / {
+      proxy_pass http://app;
+    }
+
+    error_log /var/log/nginx/errorzzz.log debug;
+}
